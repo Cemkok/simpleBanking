@@ -8,7 +8,7 @@ import com.eteration.simplebanking.model.dtos.AccountDto;
 import com.eteration.simplebanking.utils.dtoResult.Response;
 
 
-@Service
+@Service 
 public interface IAccountService {
 
 	Object saveAccount(AccountDto accountDto);
