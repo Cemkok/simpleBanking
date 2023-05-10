@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "DEBIT- SUCCESS",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -38,7 +38,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "DEBIT-FALSE",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -69,13 +69,13 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "CREDIT- SUCCESS",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"amount\": 22,\r\n  \"payee\": \"ETERATION\",\r\n  \"billingNumber\": \"5553331\"\r\n}",
+					"raw": "{\r\n  \"amount\": 22\r\n  \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -83,7 +83,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/account/v1/billPayment/669-7777",
+					"raw": "http://localhost:8080/account/v1/credit/669-7777",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -92,7 +92,7 @@
 					"path": [
 						"account",
 						"v1",
-						"billPayment",
+						"credit",
 						"669-7777"
 					]
 				}
@@ -100,7 +100,96 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "CREDIT-FALSE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": -22\r\n  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/account/v1/credit/669-7777",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"account",
+						"v1",
+						"credit",
+						"669-7777"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADDING ACCOUNT -FALSE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountOwner\": \"Cem KÖK\",\r\n  \"accountNumber\": \"669-7777\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/account/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"account",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADDING ACCOUNT - SUCCESS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountOwner\": \"Cem KÖK\",\r\n  \"accountNumber\": \"669-7772\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/account/v1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"account",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccount",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -121,13 +210,13 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "billPayment",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"accountOwner\": \"Cem KÖK\",\r\n  \"accountNumber\": \"669-7778\"\r\n}",
+					"raw": "{\r\n  \"amount\": 5.478,\r\n  \"payee\": \"ETERATION\",\r\n  \"billingNumber\": \"44444\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -135,7 +224,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/account/v1",
+					"raw": "http://localhost:8080/account/v1/credit/669-7777",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -143,7 +232,9 @@
 					"port": "8080",
 					"path": [
 						"account",
-						"v1"
+						"v1",
+						"credit",
+						"669-7777"
 					]
 				}
 			},

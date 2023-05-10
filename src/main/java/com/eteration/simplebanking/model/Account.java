@@ -17,6 +17,7 @@ import javax.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.eteration.simplebanking.dao.AccountDao;
+import com.eteration.simplebanking.exception.customException.InsufficientBalanceException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -64,6 +65,8 @@ public class Account {
 
 		this.accountOwner = accountOwner;
 		this.accountNumber = accountNumber;
+		this.createTime = LocalDateTime.now();
+
 	}
 
 	public Account post(Transaction transaction) {
@@ -72,10 +75,12 @@ public class Account {
 			DepositTransaction depositTransaction = (DepositTransaction) transaction;
 
 			this.setBalance(this.getBalance() + depositTransaction.amount);
+			this.getTransactions().add(transaction);
 
 		} else if (transaction instanceof WithdrawalTransaction) {
 			WithdrawalTransaction withdrawalTransaction = (WithdrawalTransaction) transaction;
 			this.setBalance(this.getBalance() - withdrawalTransaction.amount);
+			this.getTransactions().add(transaction);
 
 		} else if (transaction instanceof BillPaymentTransaction) {
 			BillPaymentTransaction billPaymentTransaction = (BillPaymentTransaction) transaction;
@@ -86,6 +91,20 @@ public class Account {
 		}
 
 		return this;
+	}
+
+	public void deposit(double amount) {
+
+		this.balance = this.balance + amount;
+
+	}
+
+	public void withdraw(double amount) throws InsufficientBalanceException {
+		if (this.balance < amount) {
+			throw new InsufficientBalanceException();
+		}
+		this.balance = this.balance - amount;
+
 	}
 
 	public static void main(String[] args) {

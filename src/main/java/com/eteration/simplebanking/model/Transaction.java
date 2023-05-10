@@ -39,6 +39,11 @@ public abstract  class Transaction {
 	@Max(value = 10000, message = "The balance amount to be added cannot be greater than 10000.")
 	public double amount;
 	
+	@Column(name= "pre_trade_balance" )
+	public double preTradeBalance;
+	@Column(name= "post_trade_balance" )
+	public double postTradeBalance;
+	
 	@Column(name= "transaction_type", nullable = false)
 	public String transaction_type ;
 

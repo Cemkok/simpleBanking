@@ -1,5 +1,8 @@
 package com.eteration.simplebanking.model;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -20,6 +23,9 @@ public class DepositTransaction extends Transaction{
 	
 	public DepositTransaction (double amount) {
 		super.amount=amount;
+		super.transaction_type=this.getClass().getSimpleName();
+		super.transaction_date=LocalDateTime.now();
+		super.approvalCode=UUID.randomUUID();
 		
 	}
 	
